@@ -1,0 +1,3 @@
+#!/bin/bash
+NBR=$1
+consul agent -data-dir /home/vagrant/consul -config-file /vagrant/jenkins${NBR}.json -retry-join 10.1.2.11 --bind $(ip -4 -o addr show eth1 | awk '{print $4}'|sed 's/\/24//')

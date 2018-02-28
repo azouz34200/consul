@@ -1,0 +1,14 @@
+{
+ "services": [{
+    "name": "jenkins",
+    "address": "10.1.2.10",
+    "checks": [
+{
+      "id": "jenkins-ping",
+      "http": "http://127.0.0.1:8080/login",
+      "interval": "5s"
+    }
+]
+  }
+]
+}
