@@ -1,0 +1,17 @@
+[Unit]
+Description=consul
+Requires=network-online.target
+After=network.target
+
+[Service]
+User=vagrant
+Group=vagrant
+ExecStart=/usr/local/bin/consul agent -data-dir /home/vagrant/consul -config-file /vagrant/jenkins.json -retry-join 10.1.2.11 -bind 10.1.2.10
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGINT
+TimeoutStopSec=5
+Restart=on-failure
+Environment=GOMAXPROCS=2
+
+[Install]
+WantedBy=default.target

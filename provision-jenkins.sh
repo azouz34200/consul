@@ -7,7 +7,20 @@ curl https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip?_g
 unzip consul.zip
 rm -f consul.zip
 mkdir -p /etc/consul.d
+cp /vagrant/consul-client.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable consul-client
+systemctl start consul-client
 yum -y install java-1.8.0-openjdk
 systemctl start jenkins
 sleep 30
 cat /var/lib/jenkins/secrets/initialAdminPassword
+cd /opt
+curl -k -L https://github.com/prometheus/node_exporter/releases/download/v0.15.2/node_exporter-0.15.2.linux-amd64.tar.gz -o node_exporter-0.15.2.linux-amd64.tar.gz 
+tar xvf node_exporter-0.15.2.linux-amd64.tar.gz
+mv node_exporter-0.15.2.linux-amd64 node_exporter
+cp /vagrant/node_exporter.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable node_exporter
+systemctl start node_exporter
+

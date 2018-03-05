@@ -1,0 +1,17 @@
+[Unit]
+Description=consul
+Requires=network-online.target
+After=network.target
+
+[Service]
+User=vagrant
+Group=vagrant
+ExecStart=/usr/local/bin/consul agent -server -ui -bootstrap-expect=2 -client 0.0.0.0  -data-dir /home/vagrant/consul -bind 10.1.2.11 -config-dir /vagrant/server/
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGINT
+TimeoutStopSec=5
+Restart=on-failure
+Environment=GOMAXPROCS=2
+
+[Install]
+WantedBy=default.target

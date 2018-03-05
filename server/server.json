@@ -1,0 +1,17 @@
+{
+    "datacenter": "paris",
+    "data_dir": "/home/vagrant/consul",
+    "encrypt": "HdTdiLSdrQznTgVum7zzlg==",
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "enable_debug": true,
+    "server": true,
+    "bootstrap_expect": 2,
+    "leave_on_terminate": false,
+    "skip_leave_on_interrupt": true,
+    "rejoin_after_leave": true,
+    "retry_join": [ 
+      "10.1.2.13",
+      "10.1.2.11"
+      ]
+     }

@@ -1,0 +1,6 @@
+{
+    "acl_master_token":"71445f8f-9e9a-4fca-8d12-1564971f1ba6",
+    "acl_datacenter":"paris",
+    "acl_default_policy":"deny",
+    "acl_down_policy":"deny"
+  }

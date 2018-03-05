@@ -1,5 +1,6 @@
 {
- "services": [{
+ "services": [
+   {
     "name": "jenkins",
     "address": "10.1.2.10",
     "checks": [
@@ -9,6 +10,10 @@
       "interval": "5s"
     }
 ]
-  }
+  },{
+  "name": "node_exporter",
+  "tags": ["monitor"],
+  "port": 9100
+} 
 ]
 }

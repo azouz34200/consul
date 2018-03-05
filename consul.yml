@@ -1,0 +1,53 @@
+---
+- name: Ensure jenkins is present on consul
+  hosts: localhost
+  tasks:
+  - name: Ensure jenkins service is present
+    consul:
+      check_name: "jenkins"
+      service_name: "jenkins"
+      service_address: "10.1.2.10"
+      service_port: "8080"
+      host: "10.1.2.11"
+      http: "http://10.1.2.10:8080/jenkins/login"
+      interval: "5s"
+      state: "present"
+      tags: ["prod","jenkins",
+      "traefik.enable=true",
+      "traefik.backend=10.1.2.11",
+      "traefik.port=8080",
+      #"traefik.frontend.rule=Host:10.1.2.14",
+      "traefik.frontend.passHostHeader=true",
+      "traefik.frontend.rule=PathPrefix:/jenkins"
+ 
+      ]
+      token: "71445f8f-9e9a-4fca-8d12-1564971f1ba6"
+  - name: Ensure ui service is present
+    consul:
+      check_name: "ui"
+      service_name: "ui"
+      service_address: "10.1.2.11"
+      service_port: "3000"
+      host: "10.1.2.11"
+      http: "http://10.1.2.11:3000"
+      interval: "5s"
+      state: "present"
+      tags: ["prod","ui",
+      "traefik.enable=true",
+      "traefik.backend=10.1.2.11",
+      "traefik.port=3000",
+      "traefik.frontend.rule=PathPrefixStrip:/ui"
+      ]
+      token: "799c82e4-6d94-0a7b-45af-8a45e1c27841"
+  - name: Ensure node_exporter service is present
+    consul:
+      check_name: "node-exporter"
+      service_name: "node-exporter"
+      service_address: "10.1.2.10"
+      service_port: "9100"
+      host: "10.1.2.11"
+      http: "http://10.1.2.10:9100"
+      interval: "5s"
+      state: "present"
+      token: "71445f8f-9e9a-4fca-8d12-1564971f1ba6"
+      tags: ["prod","jenkins,monitor"]
